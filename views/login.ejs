@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('navstyle.ejs') %>
+</head>
+<body>
+    <ul>
+        <li><a class="active" href="/">Register</a></li>
+        <li><a  href="/login">Login</a></li>
+      </ul><br><br> 
+      <h1 style="text-align: center;">Login</h1>
+      <% if (error) { %>
+        <% error.split(",").forEach(element => { %>
+            <p style="text-align: center; color: red;"><%= element %></p>
+        <% }) %>
+      <% } %>
+      <form style="text-align: center;" action="/login" method="post">
+        <label for="">Email</label><br>
+        <input type="text" name="email" placeholder="Input email disini" id=""><br><br>
+        <label for="">Password</label><br>
+        <input type="password" name="password" placeholder="Input password disini" id=""><br><br>
+        <button type="submit">Submit</button>
+      </form>
+</body>
+</html>
