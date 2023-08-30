@@ -20,7 +20,11 @@
         <label for="">Password</label><br>
         <input type="password" name="password" placeholder="masukkan password..." id=""><br><br>
         <label for="">Role</label><br>
-        <input type="text" name="role" placeholder="masukkan role..." id=""><br><br>
+        <select name="role" id="">
+            <option value="" disabled selected>Pilih role anda</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select><br><br>
         <button type="submit">Submit</button>
     </form>
 </body>

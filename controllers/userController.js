@@ -6,6 +6,7 @@ class UserController{
         res.render('register')
     }
     static postRegister(req,res){
+        console.log(req.body);
         const {name,email, password, role} = req.body
         User.create({name, email, password, role})
         .then(() => {
@@ -19,6 +20,7 @@ class UserController{
         res.render('login', {error})
     }
     static postLogin(req,res){
+
         const {email, password} = req.body
         User.findOne({where:{email}})
         .then(data => {
