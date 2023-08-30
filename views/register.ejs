@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('navstyle.ejs') %>
+</head>
+<body>
+    <ul>
+        <li><a class="active" href="/">Register</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul><br><br> 
+      <h1 style="text-align: center;">Register</h1>
+    <form style="text-align: center;" action="/" method="post">
+        <label for="">Name</label><br>
+        <input type="text" name="name" placeholder="masukkan nama..." id=""><br><br>
+        <label for="">Email</label><br>
+        <input type="text" name="email" placeholder="masukkan username..." id=""><br><br>
+        <label for="">Password</label><br>
+        <input type="password" name="password" placeholder="masukkan password..." id=""><br><br>
+        <label for="">Role</label><br>
+        <select name="role" id="">
+            <option value="" disabled selected>Pilih role anda</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
