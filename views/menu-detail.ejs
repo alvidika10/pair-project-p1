@@ -45,12 +45,10 @@
             <td><%= el.formatPrice %></td>
             <td><%= dateFormat(el.createdAt) %></td>
             <td>
-              <a href="/user/menu/buy"><button>Buy Menu</button></a>
+              <a href="/user/menu/<%=el.id%>/buy"><button>Buy Menu</button></a>
             </td>
           </tr>
-
         <% }) %>
-
       </table>  
     </p>
     

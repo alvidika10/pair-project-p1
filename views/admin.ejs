@@ -52,9 +52,9 @@
                     <td><img src="<%=menu.imgUrl %>" alt="" width="150px" height="100px"></td>
                     <td><%=menu.category %></td>
                     <td><%=menu.description %></td>
-                    <td><%=menu.stock %></td>
-                    <td><%=menu.createdAt %></td>
-                    <td><%=menu.price %></td>
+                    <td><%=menu.formatStock() %></td>
+                    <td><%=dateFormat(menu.createdAt) %></td>
+                    <td><%=menu.formatPrice %></td>
                     <td><a href="/admin/<%=menu.id %>/editMenu"><button>Edit Menu!</button></a><a href="/admin/<%=menu.id%>/delete"><button>Delete Menu!</button></a></td>
                 </tr>
             <% }) %>

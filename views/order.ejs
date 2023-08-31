@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Order Menu!</h1>
+      <% if (error) { %>
+        <td><%= error %></td>
+    <% } %>
+    <img src="http://pngimg.com/uploads/mcdonalds/mcdonalds_PNG1.png" alt="" width="200px" height="200px">
+    <form action="/user/menu/<%=menu.id %>/buy" method="post">
+        <td><img src="<%=menu.imgUrl %>" alt="" width="150px" height="100px"></td>
+    <label for="">Jumlah yang mau di order</label>
+    <input type="number" name="quantity" placeholder="Ex: 1,2,3" id=""><br><br>
+    <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

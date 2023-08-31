@@ -17,12 +17,26 @@ module.exports = (sequelize, DataTypes) => {
   }
   Order.init({
     amount: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER,
+    quantity:{
+      type: DataTypes.INTEGER,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Jumlah harus diisi!"
+        },
+        notEmpty:{
+          msg: "Jumlah harus diisi!"
+        }
+      }
+    },
     UserId: DataTypes.INTEGER,
-    RestaurantId: DataTypes.INTEGER
+    MenuId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Order',
   });
+  Order.beforeCreate(instances => {
+    instances.amount = 1
+  })
   return Order;
 };

@@ -1,6 +1,7 @@
-const {User, UserProfile, Restaurant, Menu} = require("../models/index");
+const {User, UserProfile, Menu, Order} = require("../models/index");
 const bcrypt = require('bcryptjs')
 const { Op } = require("sequelize")
+const {dateFormat} = require('../helper/helper')
 
 class UserController{
 
@@ -81,9 +82,8 @@ class UserController{
         const {UserId} = req.session
         User
             .findByPk(UserId, {include: UserProfile})
-            .then(data => {
-                // res.send(data)
-                res.render('user-profile', {data})
+            .then(user => {
+                res.render('user-profile', {user})
             })
             .catch(err => {
                 console.log(err)
@@ -91,33 +91,79 @@ class UserController{
             })
     }
 
-    static restaurant(req, res) {
+    static menu(req, res) {
         const {search} = req.query
 
-        console.log(search)
         let option = {
-            include: {
-                model: Menu,
-                where: {}
-            },
             order: [["name", "asc"]],
+            where: {},
         }
 
-        if (search) {
-         option.include.where.name = {[Op.iLike]: `%${search}%`}
-        } 
-
-        Restaurant
-            .findAll(option) // findbypk param id
+        Menu
+            .menuList(search, option) 
             .then(data => {
-                // res.send(data)
-                res.render('restaurant-detail', {data})
+                res.render('menu-detail', {data, dateFormat})
             })
             .catch(err => {
                 console.log(err)
                 res.send(err)
             })
     }
+
+    static order(req, res) {
+        const {error} = req.query
+        const {MenuId} = req.params
+        const {UserId} = req.session
+        Menu.findByPk(MenuId)
+        .then(menu => {
+            res.render('order', {menu, UserId, error})
+        })
+        .catch(err => {
+           console.log(err);
+           res.send(err)
+        })
+}
+static orderProcess(req,res){
+    const {MenuId} = req.params
+    const {UserId} = req.session
+    const {quantity} = req.body
+    Order.create({quantity,MenuId,UserId})
+    .then(() => {
+        res.redirect("/user/menu")
+    })
+    .catch((err) => {
+        console.log(err);
+        if(err.name === "SequelizeValidationError"){
+            let error = err.errors.map(el => el.message)
+            res.redirect(`/user/menu/${MenuId}/buy?error=${error}`)
+        } else {
+            res.send(err)
+        }
+    })
 }
 
+
+/**
+ *  const { MenuId } = req.params;
+        const { UserId } = req.session;
+        let menu = [];
+        Menu.findByPk(MenuId, {
+          include: {
+            model: Order,
+          },
+        })
+          .then((data) => {
+            menu = data;
+            return User.findByPk(UserId);
+          })
+          .then((user) => {
+            res.render('buy')
+            })
+          .catch((err) => {
+            console.log(err);
+            res.send(err);
+          });
+      }
+ */
+    }
 module.exports = UserController 

@@ -1,5 +1,5 @@
+const { dateFormat, priceFormat } = require('../helper/helper')
 const {User, UserProfile, Menu} = require('../models/index')
-
 class AdminController{
     static admin(req,res){
         const {UserId} = req.session
@@ -20,7 +20,7 @@ class AdminController{
             return Menu.findAll()
         })
         .then(menu => {
-            res.render('admin', {data, menu})
+            res.render('admin', {data, menu, priceFormat, dateFormat})
         })
         .catch(err =>{
             console.log(err);

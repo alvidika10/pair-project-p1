@@ -1,12 +1,14 @@
 const express = require('express')
 const UserController = require('../controllers/userController')
-const { isLoggedIn } = require('../middlewares/middleware')
+const { isLoggedIn, isUser } = require('../middlewares/middleware')
 const router = express.Router()
 
 
-router.get('/user', UserController.user)
+router.get('/user',isUser, UserController.user)
 
-router.get('/user/restaurant', UserController.restaurant)
+router.get('/user/menu',isUser, UserController.menu)
 
+router.get('/user/menu/:MenuId/buy',isUser, UserController.order)
+router.post('/user/menu/:MenuId/buy',isUser, UserController.orderProcess)
 
 module.exports = router

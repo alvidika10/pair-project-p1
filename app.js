@@ -2,9 +2,10 @@ const express = require('express')
 const app = express()
 const port = 3000
 app.set('view engine', 'ejs' )
-app.use(express.urlencoded({extended:true}))
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
 const session = require('express-session')
-
+app.use(bodyParser.json())
 app.use(session({
     secret: 'rahasia dungss',
     resave: false, //misal kalau gaad perubahan / no change maka tidak usah save, jika true maka jika gaad perubahan ttp save
