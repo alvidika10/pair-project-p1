@@ -12,6 +12,21 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
+      imgUrl: {
+        type: Sequelize.TEXT
+      },
+      category: {
+        type: Sequelize.STRING
+      },
+      description: {
+        type: Sequelize.TEXT
+      },
+      stock: {
+        type: Sequelize.INTEGER
+      },
+      price: {
+        type: Sequelize.DECIMAL
+      },
       RestaurantId: {
         type: Sequelize.INTEGER,
         references: {

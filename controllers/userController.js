@@ -10,7 +10,7 @@ class UserController{
         const {name,email, password, role} = req.body
         User.create({name, email, password, role})
         .then(() => {
-            console.log("sukses");
+            res.redirect('/login')
         })
         .catch(err => res.send(err))
     }

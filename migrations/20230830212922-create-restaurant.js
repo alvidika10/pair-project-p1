@@ -12,11 +12,8 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      category: {
-        type: Sequelize.STRING
-      },
-      rating: {
-        type: Sequelize.INTEGER
+      imgUrl: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
