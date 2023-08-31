@@ -111,58 +111,6 @@ class UserController{
     }
 
     static order(req, res) {
-        const { MenuId } = req.params;
-        const { UserId } = req.session;
-        let menu = [];
-        Menu.findByPk(MenuId, {
-          include: {
-            model: Order,
-          },
-        })
-          .then((data) => {
-            menu = data;
-            return User.findByPk(UserId);
-          })
-          .then((user) => {
-            // res.render('buy')
-            // res.send({menu, user})
-            res.csv([
-                {"name": menu.name, "stock": menu.stock, "price": menu.price},
-              ], true)
-            })
-          .catch((err) => {
-            console.log(err);
-            res.send(err);
-          });
-      }
-
-
-
-/**
- *  const { MenuId } = req.params;
-        const { UserId } = req.session;
-        let menu = [];
-        Menu.findByPk(MenuId, {
-          include: {
-            model: Order,
-          },
-        })
-          .then((data) => {
-            menu = data;
-            return User.findByPk(UserId);
-          })
-          .then((user) => {
-            res.render('buy')
-            })
-          .catch((err) => {
-            console.log(err);
-            res.send(err);
-          });
-      }
- */
-
-      /**
-       * static order(req, res) {
         const {error} = req.query
         const {MenuId} = req.params
         const {UserId} = req.session
@@ -193,6 +141,29 @@ static orderProcess(req,res){
         }
     })
 }
-       */
+
+
+/**
+ *  const { MenuId } = req.params;
+        const { UserId } = req.session;
+        let menu = [];
+        Menu.findByPk(MenuId, {
+          include: {
+            model: Order,
+          },
+        })
+          .then((data) => {
+            menu = data;
+            return User.findByPk(UserId);
+          })
+          .then((user) => {
+            res.render('buy')
+            })
+          .catch((err) => {
+            console.log(err);
+            res.send(err);
+          });
+      }
+ */
     }
 module.exports = UserController 
