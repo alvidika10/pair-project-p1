@@ -1,7 +1,7 @@
 const {User, UserProfile, Menu, Order} = require("../models/index");
 const bcrypt = require('bcryptjs')
 const { Op } = require("sequelize")
-const dateFormat = require('../helper/dateFormat')
+const {dateFormat} = require('../helper/helper')
 
 class UserController{
 
@@ -74,7 +74,6 @@ class UserController{
         User
             .findByPk(UserId, {include: UserProfile})
             .then(data => {
-                // res.send(data)
                 res.render('user-profile', {data})
             })
             .catch(err => {
@@ -100,6 +99,10 @@ class UserController{
                 console.log(err)
                 res.send(err)
             })
+    }
+
+    static buy(req, res) {
+        res.send("buy")
     }
 }
 

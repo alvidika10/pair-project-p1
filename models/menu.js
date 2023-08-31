@@ -1,6 +1,7 @@
 'use strict';
 
 const { Op } = require("sequelize");
+const {priceFormat} = require('../helper/helper')
 
 const {
   Model
@@ -23,6 +24,23 @@ module.exports = (sequelize, DataTypes) => {
         option.where.name = {[Op.iLike]: `%${search}%`}
        } 
       return Menu.findAll(option)
+    }
+
+    showImage() {
+      return this.imgUrl
+    }
+
+    formatStock() {
+      if (this.stock === 1) {
+        return `${this.stock} Item`
+      }
+      else {
+        return `${this.stock} Items`
+      }
+    }
+
+    get formatPrice() {
+      return priceFormat(this.price)
     }
 
   }
