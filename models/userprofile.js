@@ -15,19 +15,34 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   UserProfile.init({
-    gender: DataTypes.STRING,
-    phone: DataTypes.STRING,
+    gender:{
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Gender harus diisi!"
+        },
+        notEmpty:{
+          msg: "Gender harus diisi!"
+        }
+      }
+    },
+    phone:{
+      type: DataTypes.INTEGER,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Nomor telepon harus diisi!"
+        },
+        notEmpty:{
+          msg: "Nomor telepon harus diisi!"
+        }
+      }
+    },
     UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'UserProfile',
   });
-  UserProfile.beforeCreate(instances => {
-    if (!instances.UserId) {
-      // Find the maximum UserId in the database and increment it by 1
-      const maxUserId =   UserProfile.max('UserId', { transaction: options.transaction });
-      instances.UserId = (maxUserId || 0) + 1;
-    }
-  })
   return UserProfile;
 };

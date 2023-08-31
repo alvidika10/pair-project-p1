@@ -45,15 +45,73 @@ module.exports = (sequelize, DataTypes) => {
 
   }
   Menu.init({
-    name: DataTypes.STRING,
-    imgUrl: DataTypes.TEXT,
-    category: DataTypes.STRING,
-    description: DataTypes.TEXT,
+    name:{
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Nama makanan harus diisi!"
+        },
+        notEmpty:{
+          msg: "Nama makanan harus diisi!"
+        }
+      }
+    },
+    imgUrl:{
+      type: DataTypes.TEXT,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Foto makanan/minuman harus diisi!"
+        },
+        notEmpty:{
+          msg: "Foto makanan/minuman harus diisi!"
+        }
+      }
+    },
+    category:{
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Deskripsi makanan harus diisi!"
+        },
+        notEmpty:{
+          msg: "Deskripsi makanan harus diisi!"
+        }
+      }
+    },
+    description:{
+      type: DataTypes.TEXT,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Deskripsi makanan/minuman harus diisi!"
+        },
+        notEmpty:{
+          msg: "Deskripsi makanan/minuman harus diisi!"
+        }
+      }
+    },
     stock: DataTypes.INTEGER,
-    price: DataTypes.INTEGER,
+    price: {
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Harga harus diisi!"
+        },
+        notEmpty:{
+          msg: "Harga harus diisi!"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'Menu',
   });
+  Menu.beforeCreate(instances => {
+    instances.stock = 0
+  })
   return Menu;
 };

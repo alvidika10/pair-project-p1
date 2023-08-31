@@ -7,9 +7,13 @@
     <%- include('navstyle.ejs') %>
 </head>
 <body>
+    <br><br><br><br>
+    <% if (error) { %>
+        <td><%= error %></td>
+    <% } %>
     <%- include('navbarLoggedInUser.ejs') %>
     <br><br><br><br>
-    <form style="text-align: center;" action="/admin/<%=restId.id %>/addMenu" method="post">
+    <form style="text-align: center;" action="/admin/addMenu" method="post">
         <label for="">Name</label><br>
         <input type="text" name="name" id=""><br><br>
         <label for="">ImgUrl</label><br>
@@ -18,8 +22,6 @@
         <input type="text" name="category" id=""><br><br>
         <label for="">Description</label><br>
         <input type="text" name="description" id=""><br><br>
-        <label for="">Stock</label><br>
-        <input type="number" name="stock" id=""><br>
         <label for="">Price</label><br>
         <input type="number" name="price" id=""><br><br>
         <button type="submit">Add Menu!</button>
