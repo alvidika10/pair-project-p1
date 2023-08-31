@@ -3,6 +3,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "csv-express": "^1.2.2",
+    "csvjs": "^0.0.7",
     "dayjs": "^1.11.9",
     "easyinvoice": "^3.0.23",
     "ejs": "^3.1.9",

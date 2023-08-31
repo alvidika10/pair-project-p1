@@ -1,6 +1,6 @@
 const {User, UserProfile, Menu, Order} = require("../models/index");
 const bcrypt = require('bcryptjs')
-const { Op } = require("sequelize")
+var csv = require('csv-express')
 const {dateFormat, expiredDate} = require('../helper/helper')
 
 class UserController{
@@ -113,36 +113,58 @@ class UserController{
     }
 
     static order(req, res) {
-        const {error} = req.query
-        const {MenuId} = req.params
-        const {UserId} = req.session
-        Menu.findByPk(MenuId)
-        .then(menu => {
-            res.render('order', {menu, UserId, error})
+        const { MenuId } = req.params;
+        const { UserId } = req.session;
+        let menu = [];
+        Menu.findByPk(MenuId, {
+          include: {
+            model: Order,
+          },
         })
-        .catch(err => {
-           console.log(err);
-           res.send(err)
-        })
+          .then((data) => {
+            menu = data;
+            return User.findByPk(UserId, {include: {model:UserProfile}});
+          })
+          .then((user) => {
+            // res.render('buy')
+            // res.send({menu, user})
+            res.csv([
+                {
+                    "name": menu.name, 
+                    "stock": menu.stock, 
+                    "price": menu.price, 
+                    "category": menu.category, 
+                    "user": user.name, 
+                    "gender": user.UserProfile.gender,
+                    "email": user.email,
+                    "role": user.role
+                },
+              ], true)
+            })
+          .catch((err) => {
+            console.log(err);
+            res.send(err);
+          });
+      }
 }
-static orderProcess(req,res){
-    const {MenuId} = req.params
-    const {UserId} = req.session
-    const {quantity} = req.body
-    Order.create({quantity,MenuId,UserId})
-    .then(() => {
-        res.redirect("/user/menu")
-    })
-    .catch((err) => {
-        console.log(err);
-        if(err.name === "SequelizeValidationError"){
-            let error = err.errors.map(el => el.message)
-            res.redirect(`/user/menu/${MenuId}/buy?error=${error}`)
-        } else {
-            res.send(err)
-        }
-    })
-}
+// static orderProcess(req,res){
+//     const {MenuId} = req.params
+//     const {UserId} = req.session
+//     const {quantity} = req.body
+//     Order.create({quantity,MenuId,UserId})
+//     .then(() => {
+//         res.redirect("/user/menu")
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//         if(err.name === "SequelizeValidationError"){
+//             let error = err.errors.map(el => el.message)
+//             res.redirect(`/user/menu/${MenuId}/buy?error=${error}`)
+//         } else {
+//             res.send(err)
+//         }
+//     })
+// }
 
 
 /**
@@ -167,5 +189,5 @@ static orderProcess(req,res){
           });
       }
  */
-    }
+    // }
 module.exports = UserController 
