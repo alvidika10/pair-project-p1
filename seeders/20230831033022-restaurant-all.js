@@ -22,7 +22,6 @@ module.exports = {
       return el
     })
 
-  // console.log(data)
 
     return queryInterface.bulkInsert("Restaurants", data)
   },

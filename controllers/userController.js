@@ -1,4 +1,4 @@
-const {User, UserProfile} = require("../models/index");
+const {User, UserProfile, Restaurant, Menu} = require("../models/index");
 const bcrypt = require('bcryptjs')
 
 class UserController{
