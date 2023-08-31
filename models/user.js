@@ -14,14 +14,58 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasOne(models.UserProfile);
       User.hasMany(models.Order)
-      User.belongsToMany(models.Menu, {through: "Orders"});
+      User.belongsToMany(models.Menu, {through: models.Order});
     }
   }
   User.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING
+    name:{
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Nama harus diisi!"
+        },
+        notEmpty:{
+          msg: "Nama harus diisi!"
+        }
+      }
+    },
+    email:{
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Email harus diisi!"
+        },
+        notEmpty:{
+          msg: "Email harus diisi!"
+        }
+      }
+    },
+    password:{
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Password harus diisi!"
+        },
+        notEmpty:{
+          msg: "Password harus diisi!"
+        }
+      }
+    },
+    role:{
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Role harus diisi!"
+        },
+        notEmpty:{
+          msg: "Role harus diisi!"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'User',

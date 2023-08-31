@@ -9,12 +9,8 @@
 <body>
     <%- include('navbarLoggedInUser.ejs') %>
     <br><br><br>
-    <h1 style="text-align: center;">Admin Data</h1>
+    <h1 style="text-align: center;">Admin</h1>
     <a href="/admin/addMenu"></a>
-    <a href="/admin/<%=rest[0].id%>/addMenu"><button>Add Menu</button></a>
-    <% rest[0].Menus.forEach(el => { %>
-        <a href="/admin/<%=rest[0].id%>/<%=el.id%>/edit"><button>Edit Menu</button></a>
-    <% }) %>
     <table border="1">
         <thead>
             <tr>
@@ -34,18 +30,35 @@
         </tbody>
     </table>
     <br><br><br><br><br>
-    <h1><%=rest[0].name %></h1>
-    <img src="<%=rest[0].imgUrl%>" alt="<%=rest[0].name%>" width="200px" height="200px">
-    <table>
+    <img src="http://pngimg.com/uploads/mcdonalds/mcdonalds_PNG1.png" alt="" width="200px" height="200px">
+    <h1>Menu</h1>
+    <br><br><br>
+    <a href="/admin/addMenu"><button>Add Menu!</button></a>
+    <table border="1">
         <thead>
             <th>Name</th>
             <th>Image</th>
             <th>Category</th>
             <th>Description</th>
             <th>Stock</th>
-            <th></th>
-            <th></th>
+            <th>createdAt</th>
+            <th>Price</th>
+            <th>Action</th>
         </thead>
+        <tbody>
+            <% menu.forEach(menu => { %>
+                <tr>
+                    <td><%=menu.name %></td>
+                    <td><img src="<%=menu.imgUrl %>" alt="" width="150px" height="100px"></td>
+                    <td><%=menu.category %></td>
+                    <td><%=menu.description %></td>
+                    <td><%=menu.stock %></td>
+                    <td><%=menu.createdAt %></td>
+                    <td><%=menu.price %></td>
+                    <td><a href="/admin/<%=menu.id %>/editMenu"><button>Edit Menu!</button></a><a href="/admin/<%=menu.id%>/delete"><button>Delete Menu!</button></a></td>
+                </tr>
+            <% }) %>
+        </tbody>
     </table>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const {User, UserProfile, Restaurant, Menu} = require('../models/index')
+const {User, UserProfile, Menu} = require('../models/index')
 
 class AdminController{
     static admin(req,res){
@@ -17,10 +17,10 @@ class AdminController{
         User.findOne(options)
         .then(result => {
             data = result
-            return Restaurant.findAll({include:Menu})
+            return Menu.findAll()
         })
-        .then(rest => {
-            res.render('admin', {data, rest})
+        .then(menu => {
+            res.render('admin', {data, menu})
         })
         .catch(err =>{
             console.log(err);
@@ -29,19 +29,61 @@ class AdminController{
     }
 
     static addMenuForm(req,res){
-        Restaurant.findOne({attributes: ['id']})
-        .then(restId => {
-            res.render('addMenuForm', {restId})
+        const {error} = req.query
+        res.render("addMenuForm", {error})
+    }
+    static addMenuProcess(req,res){
+        const {name,imgUrl,category,description,price} = req.body
+        Menu.create({name,imgUrl,category,description,price})
+        .then(() => {
+            res.redirect("/admin")
+        })
+        .catch(err => {
+            console.log(err);
+            if(err.name === "SequelizeValidationError"){
+                let error = err.errors.map(el => el.message)
+                res.redirect(`/admin/addMenu?error=${error}`)
+            } else {
+                res.send(err)
+            }
+        })
+    }
+
+
+    static deleteMenu(req,res){
+        const {MenuId} = req.params
+        Menu.destroy({where:{id:MenuId}})
+        .then(() => {
+            res.redirect("/admin")
         })
         .catch(err => {
             console.log(err);
             res.send(err)
         })
     }
-    static addMenuProcess(req,res){
-        const {RestaurantId} = req.params
+
+    static editMenuForm(req,res){
+        const {MenuId} = req.params
+        Menu.findByPk(MenuId)
+        .then(menu => {
+            res.render('editMenuForm' ,{menu})
+        })
+        .catch(err => {
+            console.log(err);
+            res.send(err)
+        })
+    }
+    static editMenuProcess(req,res){
+        const {MenuId} = req.params
         const {name,imgUrl,category,description,stock,price} = req.body
-        Menu.create({name,imgUrl,category,description,stock,price, RestaurantId})
+        Menu.update({name,imgUrl,category,description,stock,price}, {where:{id:MenuId}})
+        .then(() => {
+            res.redirect('/admin')
+        })
+        .catch(err => {
+            console.log(err);
+            res.send(err)
+        })
     }
 }
 

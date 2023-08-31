@@ -9,7 +9,8 @@ class UserController{
     }
 
     static formRegister(req,res){
-        res.render('register')
+        const {error} = req.query
+        res.render('register', {error})
     }
 
     static postRegister(req,res){
@@ -21,7 +22,15 @@ class UserController{
         .then(() => {
             res.redirect('/login')
         })
-        .catch(err => res.send(err))
+        .catch(err => {
+            console.log(err);
+            if(err.name === "SequelizeValidationError"){
+                let error = err.errors.map(el => el.message)
+                res.redirect(`/register?error=${error}`)
+            } else {
+                res.send(err)
+            }
+        })
     }
 
     static formLogin(req,res){
