@@ -9,6 +9,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      amount:{
+        type:Sequelize.INTEGER,
+      },
+      quantity:{
+        type:Sequelize.INTEGER,
+      },
       UserId: {
         type: Sequelize.INTEGER,
         references: {
@@ -18,11 +24,11 @@ module.exports = {
           key: "id"
         }
       },
-      RestaurantId: {
+      MenuId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: "Restaurants"
+            tableName: "Menus"
           },
           key: "id"
         }

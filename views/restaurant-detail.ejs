@@ -11,9 +11,19 @@
     <br><br><br>
     <h1>Restaurant</h1>
 
-    <h4><%= data[0].name %> Menu's</h4>
+    <p>
+      <h4><%= data[0].name %> Menu's</h4>
+    </p>
 
-    <table border="1">
+    <p>
+      <form>
+        <input type="text" name="search">
+        <input type="submit" value="search">
+      </form>
+    </p>
+    
+    <p>
+      <table border="1">
         <tr>
           <th>No</th>
           <th>Image</th>
@@ -21,6 +31,7 @@
           <th>Description</th>
           <th>Stock</th>
           <th>Price</th>
+          <th>Date</th>
           <th>Action</th>
         </tr>
 
@@ -33,6 +44,7 @@
             <td><%= el.description %></td>
             <td><%= el.stock %></td>
             <td><%= el.price %></td>
+            <td><%= el.createdAt %></td>
             <td>
               <a href="/user/restaurant/buy"><button>Buy Menu</button></a>
             </td>
@@ -40,7 +52,8 @@
 
         <% }) %>
 
-      </table>
-
+      </table>  
+    </p>
+    
 </body>
 </html>

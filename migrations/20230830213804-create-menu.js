@@ -27,15 +27,6 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
-      RestaurantId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: "Restaurants"
-          },
-          key: "id"
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

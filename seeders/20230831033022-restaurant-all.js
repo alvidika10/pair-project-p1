@@ -15,7 +15,7 @@ module.exports = {
      * }], {});
     */
 
-    let data = JSON.parse(fs.readFileSync("./data/restaurant.json", "utf-8"))
+    let data = JSON.parse(fs.readFileSync("./data/menus.json", "utf-8"))
 
     data = data.map(el => {
       el.createdAt = el.updatedAt = new Date()
@@ -23,7 +23,7 @@ module.exports = {
     })
 
 
-    return queryInterface.bulkInsert("Restaurants", data)
+    return queryInterface.bulkInsert("Menus", data)
   },
 
   down (queryInterface, Sequelize) {
@@ -33,6 +33,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    return queryInterface.bulkInsert("Restaurants")
+    return queryInterface.bulkInsert("Menus")
   }
 };
