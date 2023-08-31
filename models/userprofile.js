@@ -22,5 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'UserProfile',
   });
+  UserProfile.beforeCreate(instances => {
+    if (!instances.UserId) {
+      // Find the maximum UserId in the database and increment it by 1
+      const maxUserId =   UserProfile.max('UserId', { transaction: options.transaction });
+      instances.UserId = (maxUserId || 0) + 1;
+    }
+  })
   return UserProfile;
 };

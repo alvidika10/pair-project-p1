@@ -7,7 +7,7 @@ router.get('/',UserController.formRegister)
 router.post('/',UserController.postRegister)
 router.get('/login',UserController.formLogin)
 router.post('/login',UserController.postLogin)
-
+router.get('/logout', UserController.logout)
 
 
 module.exports = router

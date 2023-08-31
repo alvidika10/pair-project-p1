@@ -1,4 +1,4 @@
-const {User} = require("../models/index");
+const {User, UserProfile} = require("../models/index");
 const bcrypt = require('bcryptjs')
 
 class UserController{
@@ -9,9 +9,10 @@ class UserController{
 
     static postRegister(req,res){
         console.log(req.body);
-        const {name,email, password, role} = req.body
+        const {name,gender,phone, email, password, role} = req.body
         User.create({name, email, password, role})
         .then(() => {
+            // return UserProfile.create({gender,phone})
             res.redirect('/login')
         })
         .catch(err => res.send(err))
@@ -29,9 +30,14 @@ class UserController{
         .then(data => {
             if(data){
                 req.session.email = data.email
+                req.session.role = data.role
                 const isValidPassword = bcrypt.compareSync(password, data.password)
                 if(isValidPassword){
-                    res.send("Sukses!")
+                    if(req.session.role === "user"){
+                        res.redirect(`/user/${data.id}`)
+                    } else {
+                        res.redirect(`/admin/${data.id}`)
+                    }
                 } else {
                     let error = 'Email atau Password tidak sesuai!'
                     res.redirect(`/login?error=${error}`)
