@@ -2,9 +2,11 @@ const {User} = require("../models/index");
 const bcrypt = require('bcryptjs')
 
 class UserController{
+
     static formRegister(req,res){
         res.render('register')
     }
+
     static postRegister(req,res){
         console.log(req.body);
         const {name,email, password, role} = req.body
@@ -19,6 +21,7 @@ class UserController{
         const {error} = req.query
         res.render('login', {error})
     }
+    
     static postLogin(req,res){
 
         const {email, password} = req.body
@@ -40,8 +43,14 @@ class UserController{
         })
         .catch(err => res.send(err))
     }
-    static tes(req,res){
-        res.send('oi')
+
+    static logout(req,res){
+        req.session.destroy(err => {
+            if(err) console.log(err);
+            else{
+                res.redirect('/')
+            }
+        })
     }
 }
 
