@@ -2,30 +2,36 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('Menus', {
+    return queryInterface.createTable('Orders', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      imgUrl: {
-        type: Sequelize.TEXT
-      },
-      category: {
-        type: Sequelize.STRING
-      },
-      description: {
-        type: Sequelize.TEXT
-      },
-      stock: {
+      amount: {
         type: Sequelize.INTEGER
       },
-      price: {
+      quantity: {
         type: Sequelize.INTEGER
+      },
+      UserId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Users"
+          },
+          key: "id"
+        }
+      },
+      MenuId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Menus"
+          },
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +44,6 @@ module.exports = {
     });
   },
   down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Menus');
+    return queryInterface.dropTable('Orders');
   }
 };

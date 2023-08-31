@@ -1,0 +1,34 @@
+[
+    {
+        "name": "McSpicy",
+        "imgUrl": "https://tse1.mm.bing.net/th?id=OIP.6lhxuRpnPNU7IlzBxUW3lAHaE1&pid=Api&rs=1&c=1&qlt=95&w=150&h=97",
+        "category": "Burger",
+        "description": "Hot and Spicy!",
+        "stock": 25,
+        "price": 40000
+    },
+    {
+        "name": "Fish Fillet",
+        "imgUrl": "https://tse1.mm.bing.net/th?id=OIP.CYvRUd5iBwculSEdyMgRlgHaED&pid=Api&rs=1&c=1&qlt=95&w=191&h=104",
+        "category": "Burger",
+        "description": "Fish!!!",
+        "stock": 30,
+        "price": 29000
+    },
+    {
+        "name": "Coca-Cola",
+        "imgUrl": "https://tse1.mm.bing.net/th?id=OIP.wN9vH342re1u9ahAMLE5IQHaE8&pid=Api&P=0&h=180",
+        "category": "Beverages",
+        "description": "COOOOOOCAAACOOLAA!",
+        "stock": 100,
+        "price": 10000
+    },
+    {
+        "name": "Fried Chicken",
+        "imgUrl": "https://tse1.mm.bing.net/th?id=OIP.yxgiSBAO7bBILGSMUv3REgHaFj&pid=Api&P=0&h=180",
+        "category": "Chicken",
+        "description": "Kukuruyukk!",
+        "stock": 90,
+        "price": 20000
+    }
+]

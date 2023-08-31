@@ -11,7 +11,10 @@
     <br><br><br>
     <h1 style="text-align: center;">Admin Data</h1>
     <a href="/admin/addMenu"></a>
-    <%= console.log(data); %>
+    <a href="/admin/<%=rest[0].id%>/addMenu"><button>Add Menu</button></a>
+    <% rest[0].Menus.forEach(el => { %>
+        <a href="/admin/<%=rest[0].id%>/<%=el.id%>/edit"><button>Edit Menu</button></a>
+    <% }) %>
     <table border="1">
         <thead>
             <tr>
@@ -29,6 +32,20 @@
                 <td><%=data.UserProfile.gender%></td>
             </tr>
         </tbody>
+    </table>
+    <br><br><br><br><br>
+    <h1><%=rest[0].name %></h1>
+    <img src="<%=rest[0].imgUrl%>" alt="<%=rest[0].name%>" width="200px" height="200px">
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Stock</th>
+            <th></th>
+            <th></th>
+        </thead>
     </table>
 </body>
 </html>
