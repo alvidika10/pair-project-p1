@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Menu.hasMany(models.User, {through: "Orders"})
+      Menu.hasMany(models.Order)
+      Menu.belongsToMany(models.User, {through: "Orders"});
     }
   }
   Menu.init({
@@ -20,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     category: DataTypes.STRING,
     description: DataTypes.TEXT,
     stock: DataTypes.INTEGER,
-    price: DataTypes.DECIMAL,
+    price: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Menu',
