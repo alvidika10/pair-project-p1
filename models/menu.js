@@ -1,7 +1,10 @@
 'use strict';
 
+const dayjs = require('dayjs');
+
 const { Op } = require("sequelize");
-const {priceFormat} = require('../helper/helper')
+const {priceFormat, expiredDate} = require('../helper/helper')
+
 
 const {
   Model
@@ -41,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
 
     get formatPrice() {
       return priceFormat(this.price)
+    }
+
+    get formatExpired() {
+      return `Expired Date - ${expiredDate()}`
     }
 
   }
@@ -112,6 +119,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   Menu.beforeCreate(instances => {
     instances.stock = 0
+    instances.createdAt = dayjs();
+    // console.log(instances.createdAt)
   })
   return Menu;
 };

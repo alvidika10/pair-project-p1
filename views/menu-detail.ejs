@@ -31,6 +31,7 @@
           <th>Stock</th>
           <th>Price</th>
           <th>Date</th>
+          <th>Expired Date</th>
           <th>Action</th>
         </tr>
 
@@ -44,12 +45,14 @@
             <td><%= el.formatStock() %></td>
             <td><%= el.formatPrice %></td>
             <td><%= dateFormat(el.createdAt) %></td>
+            <td><%= el.formatExpired %></td>
             <td>
               <a href="/user/menu/<%=el.id%>/buy"><button>Buy Menu</button></a>
             </td>
           </tr>
         <% }) %>
       </table>  
+      
     </p>
     
 </body>

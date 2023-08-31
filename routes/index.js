@@ -5,6 +5,6 @@ const router = express.Router()
 router.use(require('./register-login'))
 router.use(require('./admin'))
 router.use(require('./user'))
-router.get('/'  ,UserController.home)
+router.get('/' ,isLoggedIn ,UserController.home)
 
 module.exports = router
