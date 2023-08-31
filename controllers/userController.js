@@ -1,5 +1,6 @@
-const {User, UserProfile} = require("../models/index");
+const {User, UserProfile, Restaurant, Menu} = require("../models/index");
 const bcrypt = require('bcryptjs')
+const { Op } = require("sequelize")
 
 class UserController{
 
@@ -72,6 +73,7 @@ class UserController{
         User
             .findByPk(UserId, {include: UserProfile})
             .then(data => {
+                // res.send(data)
                 res.render('user-profile', {data})
             })
             .catch(err => {
@@ -81,11 +83,25 @@ class UserController{
     }
 
     static restaurant(req, res) {
-        // const {UserId} = req.params
+        const {search} = req.query
+
+        console.log(search)
+        let option = {
+            include: {
+                model: Menu,
+                where: {}
+            },
+            order: [["name", "asc"]],
+        }
+
+        if (search) {
+         option.include.where.name = {[Op.iLike]: `%${search}%`}
+        } 
+
         Restaurant
-            .findAll({include: Menu})
+            .findAll(option) // findbypk param id
             .then(data => {
-                // res.send(data[0])
+                // res.send(data)
                 res.render('restaurant-detail', {data})
             })
             .catch(err => {
