@@ -8,7 +8,9 @@ router.get('/user',isUser, UserController.user)
 
 router.get('/user/menu',isUser, UserController.menu)
 
+// router.get('/user/menu/buy',isUser, UserController.order)
+
 router.get('/user/menu/:MenuId/buy',isUser, UserController.order)
-router.post('/user/menu/:MenuId/buy',isUser, UserController.orderProcess)
+// router.post('/user/menu/:MenuId/buy',isUser, UserController.orderProcess)
 
 module.exports = router
