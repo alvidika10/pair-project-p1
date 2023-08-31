@@ -9,11 +9,7 @@
 <body>
     <%- include('navbarLoggedInUser.ejs') %>
     <br><br><br>
-    <h1>Restaurant</h1>
-
-    <p>
-      <h4><%= data[0].name %> Menu's</h4>
-    </p>
+    <h1>List Menu</h1>
 
     <p>
       <form>
@@ -35,7 +31,7 @@
           <th>Action</th>
         </tr>
 
-        <% data[0].Menus.forEach((el, index) => { %>
+        <% data.forEach((el, index) => { %>
 
           <tr>
             <td><%= ++index %></td>
@@ -44,9 +40,9 @@
             <td><%= el.description %></td>
             <td><%= el.stock %></td>
             <td><%= el.price %></td>
-            <td><%= el.createdAt %></td>
+            <td><%= dateFormat(el.createdAt) %></td>
             <td>
-              <a href="/user/restaurant/buy"><button>Buy Menu</button></a>
+              <a href="/user/menu/buy"><button>Buy Menu</button></a>
             </td>
           </tr>
 

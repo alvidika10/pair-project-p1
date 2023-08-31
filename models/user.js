@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasOne(models.UserProfile);
       User.hasMany(models.Order)
-      User.belongsToMany(models.Menu, {through: "Orders"});
+      User.belongsToMany(models.Menu, {through: models.Order});
     }
   }
   User.init({

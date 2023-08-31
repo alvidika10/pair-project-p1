@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/user', UserController.user)
 
-router.get('/user/restaurant', UserController.restaurant)
+router.get('/user/menu', UserController.menu)
 
 
 module.exports = router

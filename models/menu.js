@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Menu.hasMany(models.Order)
-      Menu.belongsToMany(models.User, {through: "Orders"});
+      Menu.belongsToMany(models.User, {through: models.Order});
     }
   }
   Menu.init({

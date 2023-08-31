@@ -1,6 +1,7 @@
-const {User, UserProfile, Restaurant, Menu} = require("../models/index");
+const {User, UserProfile, Menu, Order} = require("../models/index");
 const bcrypt = require('bcryptjs')
 const { Op } = require("sequelize")
+const dateFormat = require('../helper/dateFormat')
 
 class UserController{
 
@@ -82,27 +83,24 @@ class UserController{
             })
     }
 
-    static restaurant(req, res) {
+    static menu(req, res) {
         const {search} = req.query
 
         console.log(search)
         let option = {
-            include: {
-                model: Menu,
-                where: {}
-            },
+            where: {},
             order: [["name", "asc"]],
         }
 
         if (search) {
-         option.include.where.name = {[Op.iLike]: `%${search}%`}
+         option.where.name = {[Op.iLike]: `%${search}%`}
         } 
 
-        Restaurant
+        Menu
             .findAll(option) // findbypk param id
             .then(data => {
                 // res.send(data)
-                res.render('restaurant-detail', {data})
+                res.render('menu-detail', {data, dateFormat})
             })
             .catch(err => {
                 console.log(err)
