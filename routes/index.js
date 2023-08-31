@@ -4,7 +4,9 @@ const { isLoggedIn } = require('../middlewares/middleware')
 const router = express.Router()
 router.use(require('./register-login'))
 router.use(isLoggedIn)
-router.get('/tes', UserController.tes)
+
+
+router.use(require('./user'))
 
 
 module.exports = router
