@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('navstyle') %>
+</head>
+<body>
+    <%- include('navbarLoggedInUser.ejs') %>
+    <br><br><br>
+    <h1 style="text-align: center;">Admin Data</h1>
+    <a href="/admin/addMenu"></a>
+    <%= console.log(data); %>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%=data.name %></td>
+                <td><%=data.email %></td>
+                <td><%=data.UserProfile.phone%></td>
+                <td><%=data.UserProfile.gender%></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

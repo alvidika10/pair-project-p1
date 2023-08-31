@@ -3,7 +3,7 @@ const { isLoggedIn } = require('../middlewares/middleware')
 const AdminController = require('../controllers/adminController')
 const router = express.Router()
 
-router.get('/admin/:id', AdminController.admin)
+router.get('/admin', AdminController.admin)
 
 
 module.exports = router
