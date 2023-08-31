@@ -1,4 +1,7 @@
 'use strict';
+
+const { Op } = require("sequelize");
+
 const {
   Model
 } = require('sequelize');
@@ -14,6 +17,14 @@ module.exports = (sequelize, DataTypes) => {
       Menu.hasMany(models.Order)
       Menu.belongsToMany(models.User, {through: models.Order});
     }
+
+    static menuList(search, option) {
+      if (search) {
+        option.where.name = {[Op.iLike]: `%${search}%`}
+       } 
+      return Menu.findAll(option)
+    }
+
   }
   Menu.init({
     name: DataTypes.STRING,

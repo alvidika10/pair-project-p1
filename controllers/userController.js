@@ -86,20 +86,14 @@ class UserController{
     static menu(req, res) {
         const {search} = req.query
 
-        console.log(search)
         let option = {
-            where: {},
             order: [["name", "asc"]],
+            where: {},
         }
 
-        if (search) {
-         option.where.name = {[Op.iLike]: `%${search}%`}
-        } 
-
         Menu
-            .findAll(option) // findbypk param id
+            .menuList(search, option) 
             .then(data => {
-                // res.send(data)
                 res.render('menu-detail', {data, dateFormat})
             })
             .catch(err => {
