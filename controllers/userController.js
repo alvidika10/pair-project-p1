@@ -1,7 +1,7 @@
 const {User, UserProfile, Menu, Order} = require("../models/index");
 const bcrypt = require('bcryptjs')
 const { Op } = require("sequelize")
-const {dateFormat} = require('../helper/helper')
+const {dateFormat, expiredDate} = require('../helper/helper')
 
 class UserController{
 
@@ -99,10 +99,12 @@ class UserController{
             where: {},
         }
 
+        let result = expiredDate(); // Call the function and store the result
+
         Menu
             .menuList(search, option) 
             .then(data => {
-                res.render('menu-detail', {data, dateFormat})
+                res.render('menu-detail', {data, dateFormat, result})
             })
             .catch(err => {
                 console.log(err)
