@@ -3,28 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <%- include('navstyle.ejs') %>
+    <title>Add Menu</title>
+    <link rel="stylesheet" href="styles.css"> <!-- You'll need to create this CSS file -->
+    <style>
+        /* Add any additional inline styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group {
+            margin: 10px 0;
+            text-align: left;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <br><br><br><br>
-    <% if (error) { %>
-        <td><%= error %></td>
-    <% } %>
-    <%- include('navbarLoggedInUser.ejs') %>
-    <br><br><br><br>
-    <form style="text-align: center;" action="/admin/addMenu" method="post">
-        <label for="">Name</label><br>
-        <input type="text" name="name" id=""><br><br>
-        <label for="">ImgUrl</label><br>
-        <input type="text" name="imgUrl" id=""><br><br>
-        <label for="">Category</label><br>
-        <input type="text" name="category" id=""><br><br>
-        <label for="">Description</label><br>
-        <input type="text" name="description" id=""><br><br>
-        <label for="">Price</label><br>
-        <input type="number" name="price" id=""><br><br>
-        <button type="submit">Add Menu!</button>
-    </form>
+    <div class="container">
+        <h1>Add a New Menu Item</h1>
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+        <form action="/admin/addMenu" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="imgUrl">Image URL:</label>
+                <input type="text" name="imgUrl" id="imgUrl" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <input type="text" name="category" id="category" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" name="price" id="price" required>
+            </div>
+            <button type="submit">Add Menu</button>
+        </form>
+    </div>
 </body>
 </html>

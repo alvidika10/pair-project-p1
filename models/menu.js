@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     formatStock() {
-      if (this.stock === 1) {
+      if (this.stock < 2) {
         return `${this.stock} Item`
       }
       else {
